@@ -51,6 +51,8 @@ namespace PushupChallenge
             SaveCommand = new Command(Save);
             _repository = new PushupSetRepository();
             _repository.Initialize().Wait();
+
+            //Doing this synchronously seemed to hang, or maybe it was a coincidence
             Action loadTotals =  async () => TotalRepetitions = await _repository.GetTotalRepetitions();
             loadTotals.Invoke();
         }
